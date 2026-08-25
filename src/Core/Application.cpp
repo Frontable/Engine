@@ -20,7 +20,6 @@ namespace Frost
         FROST_INIT_LOG(true, true);
         FROST_LOG("FrostEngine v2 initializing");
 
-
         // window
         m_Window = IWindow::Create({
             m_Config.title,
@@ -43,6 +42,9 @@ namespace Frost
 
         // renderer
         m_Renderer = std::make_unique<BatchRenderer>();
+
+        m_ThreadPool = std::make_unique<Frost::ThreadPool>();
+        FROST_LOG("ThreadPool ready — %zu threads", m_ThreadPool->ThreadCount());
 
         // camera
         m_Camera = std::make_unique<Camera2D>(

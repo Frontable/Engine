@@ -10,6 +10,7 @@
 #include "Core/EventBus.h"
 #include "Core/Events.h"
 #include "Core/Logger.h"
+#include "Core/Threadpool.h"
 
 namespace Frost
 {
@@ -49,6 +50,8 @@ namespace Frost
             return *s_Instance;
         }
 
+        Frost::ThreadPool& GetThreadPool() { return *m_ThreadPool; }
+
     protected:
         AppConfig m_Config;
 
@@ -60,6 +63,7 @@ namespace Frost
         std::unique_ptr<BatchRenderer> m_Renderer;
         std::unique_ptr<Camera2D>      m_Camera;
         std::shared_ptr<Texture>       m_WhiteTex;
+        std::unique_ptr<Frost::ThreadPool> m_ThreadPool;
 
         bool m_Running = true;
 

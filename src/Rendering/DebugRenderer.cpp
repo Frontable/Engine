@@ -50,6 +50,10 @@ namespace Frost
     {
         if (m_Circles.empty() || !m_Initialized) return;
 
+        // Save state
+        GLboolean depthTestWasEnabled;
+        glGetBooleanv(GL_DEPTH_TEST, &depthTestWasEnabled);
+
         m_Shader->Bind();
         m_Shader->SetMat4("uProjection", viewProjection);
 
@@ -58,31 +62,34 @@ namespace Frost
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glDisable(GL_DEPTH_TEST); // always draw on top
+        glDisable(GL_DEPTH_TEST);
 
         for (auto& circle : m_Circles)
         {
             float verts[SEGMENTS * 2];
             for (int i = 0; i < SEGMENTS; i++)
             {
-                float angle = (float)i / (float)SEGMENTS * TWO_PI;
+                float angle = (float)i / (float)SEGMENTS * Frost::TWO_PI;
                 verts[i * 2 + 0] = circle.center.x + std::cos(angle) * circle.radius;
                 verts[i * 2 + 1] = circle.center.y + std::sin(angle) * circle.radius;
             }
 
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(verts), verts);
-
             glUniform4f(
                 glGetUniformLocation(m_Shader->ID(), "uColor"),
                 circle.color.r, circle.color.g,
                 circle.color.b, circle.color.a
             );
-
             glDrawArrays(GL_LINE_LOOP, 0, SEGMENTS);
         }
 
-        glEnable(GL_DEPTH_TEST); // restore
-        m_Circles.clear();
+        // Restore state exactly as we found it
+        if (depthTestWasEnabled) glEnable(GL_DEPTH_TEST);
+        else                     glDisable(GL_DEPTH_TEST);
+
+        glUseProgram(0);
         glBindVertexArray(0);
+
+        m_Circles.clear();
     }
 }

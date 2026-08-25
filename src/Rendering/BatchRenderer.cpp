@@ -147,7 +147,6 @@ namespace Frost
     {
         if (m_IndicesCount == 0) return;
 
-        // Bind texture
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, m_CurrentTexID);
         m_Shader->SetInt("uTexture", 0);
@@ -157,6 +156,7 @@ namespace Frost
         glBindVertexArray(m_VAO);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
         glDrawElements(GL_TRIANGLES, m_IndicesCount, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
 

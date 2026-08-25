@@ -7,6 +7,7 @@
 #include "Core/EventBus.h"
 #include "Core/Events.h"
 #include "Core/Application.h"
+#include "Core/ThreadPool.h"
 
 // Platform
 #include "Platform/Window/IWindow.h"

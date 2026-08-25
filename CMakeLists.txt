@@ -3,15 +3,56 @@ project(Frost LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_subdirectory(vendor)
+# ======================================================
+# Only build vendor if not already defined
+# Prevents duplicate target errors when multiple
+# projects include Frost as a submodule
+# ======================================================
+if(NOT TARGET glad)
+    add_library(glad STATIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/src/glad.c
+     "src/Core/ThreadPool.h")
+    target_include_directories(glad PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/include>
+    )
+endif()
 
+if(NOT TARGET glfw)
+    set(GLFW_BUILD_DOCS     OFF CACHE BOOL "" FORCE)
+    set(GLFW_BUILD_TESTS    OFF CACHE BOOL "" FORCE)
+    set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    set(GLFW_INSTALL        OFF CACHE BOOL "" FORCE)
+    add_subdirectory(
+        ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw
+        ${CMAKE_CURRENT_BINARY_DIR}/vendor/glfw
+    )
+endif()
+
+if(NOT TARGET freetype)
+    set(FT_DISABLE_ZLIB     ON CACHE BOOL "" FORCE)
+    set(FT_DISABLE_BZIP2    ON CACHE BOOL "" FORCE)
+    set(FT_DISABLE_PNG      ON CACHE BOOL "" FORCE)
+    set(FT_DISABLE_HARFBUZZ ON CACHE BOOL "" FORCE)
+    set(FT_DISABLE_BROTLI   ON CACHE BOOL "" FORCE)
+    add_subdirectory(
+        ${CMAKE_CURRENT_SOURCE_DIR}/vendor/freetype
+        ${CMAKE_CURRENT_BINARY_DIR}/vendor/freetype
+    )
+endif()
+
+# ======================================================
+# FrostEngine library
+# ======================================================
 file(GLOB_RECURSE FROST_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
 )
 
-add_library(Frost STATIC ${FROST_SOURCES} "src/Rendering/DebugRenderer.h" "src/Rendering/DebugRenderer.cpp")
+add_library(Frost STATIC ${FROST_SOURCES} "src/Core/ThreadPool.h")
 
+# ======================================================
+# Include paths — PUBLIC so consumers inherit them
+# ======================================================
 target_include_directories(Frost
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
@@ -21,6 +62,9 @@ target_include_directories(Frost
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/freetype/include>
 )
 
+# ======================================================
+# Platform linking
+# ======================================================
 if(WIN32)
     target_link_libraries(Frost
         PUBLIC
@@ -42,12 +86,19 @@ elseif(UNIX)
     )
 endif()
 
+# ======================================================
+# Compiler definitions
+# ======================================================
 target_compile_definitions(Frost
     PUBLIC
         $<$<CONFIG:Debug>:FROST_DEBUG>
         $<$<CONFIG:Release>:FROST_RELEASE>
 )
 
+# ======================================================
+# Compiler warnings — PRIVATE so they don't leak
+# to consumers
+# ======================================================
 if(MSVC)
     target_compile_options(Frost PRIVATE /W4)
 else()
@@ -57,89 +108,3 @@ else()
         -Wno-unused-parameter
     )
 endif()
-
-
-#[[
-cmake_minimum_required(VERSION 3.20)
-project(Frost LANGUAGES C CXX)
-
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON) 
-
-add_subdirectory(vendor)
-
-file(GLOB_RECURSE FROST_SOURCES
-    "FrostEngine/*.cpp"
-    "FrostEngine/*.h"
-)
-
-add_library(Frost STATIC ${FROST_SOURCES} "src/ECS/Entity.h" "src/ECS/SparseSet.h" 
-"src/ECS/ComponentPool.h" "src/ECS/View.h" "src/ECS/Registry.h" "src/ECS/ScriptBase.h" 
-"src/ECS/ScriptComponent.h" "src/ECS/ScriptSystem.h"  "src/Rendering/Shader.h" 
-"src/Rendering/ShaderLoader.h" "src/Rendering/ShaderLoader.cpp" "src/Rendering/Texture.h" 
-"src/Rendering/TextureLoader.h" "src/Rendering/TextureLoader.cpp" "src/Rendering/BatchRenderer.h" 
-"src/Rendering/BatchRenderer.cpp" "src/Rendering/Camera2D.h" "src/Rendering/Camera2D.cpp" "src/Assets/AssetHandle.h" 
-"src/Assets/AssetManager.h" "src/Assets/AssetRegistry.h" "src/Scene/Scene.h" "src/Scene/SceneManager.h" "src/Core/Application.h" 
-"src/Core/Application.cpp" "src/Core/EntryPoint.h" "Frost.h")
-
-target_include_directories(Frost
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
-)
-
-target_link_libraries(Frost
-        glad
-        glfw
-        freetype
-        stb_image
-        opengl32
-)
-
-target_compile_definitions(Frost
-    PUBLIC
-        $<$<CONFIG:Debug>:FROST_DEBUG>
-        $<$<CONFIG:Release>:FROST_RELEASE>
-)
-#]]
-
-
-#[[
-target_include_directories(Frost
-    PUBLIC
-        # src/ is the root — so #include "Core/Logger.h" works
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/include>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw/include>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/freetype/include>
-)
-
-target_link_libraries(Frost
-        glad
-        glfw
-        freetype
-        opengl32
-)
-
-target_compile_definitions(Frost
-    PUBLIC
-        $<$<CONFIG:Debug>:FROST_DEBUG>
-        $<$<CONFIG:Release>:FROST_RELEASE>
-)
-
-if(MSVC)
-    target_compile_options(Frost PRIVATE /W3)
-endif()
-
-target_compile_definitions(Frost
-    PUBLIC
-        $<$<CONFIG:Debug>:FROST_DEBUG>
-        $<$<CONFIG:Release>:FROST_RELEASE>
-)
-
-if(MSVC)
-    target_compile_options(Frost PRIVATE /W3)
-endif()
-
-]]#

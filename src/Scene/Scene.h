@@ -5,6 +5,7 @@
 #include "ECS/ScriptSystem.h"
 #include "Core/EventBus.h"
 #include "Assets/AssetLoader.h"
+#include "Platform/Input/Input.h"
 
 namespace Frost
 {
@@ -26,8 +27,10 @@ namespace Frost
         
         void Init()
         {
+            //Frost::Input::Update();//clear input from old scene
             m_Registry = std::make_unique<Registry>();
             m_ScriptSystem = std::make_unique<ScriptSystem>(*m_Registry);
+
 
             OnInit();
         }
