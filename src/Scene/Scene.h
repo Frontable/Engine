@@ -27,7 +27,7 @@ namespace Frost
         
         void Init()
         {
-            //Frost::Input::Update();//clear input from old scene
+            Frost::Input::Update();//clear input from old scene
             m_Registry = std::make_unique<Registry>();
             m_ScriptSystem = std::make_unique<ScriptSystem>(*m_Registry);
 
@@ -51,6 +51,11 @@ namespace Frost
         {
             OnShutdown();
             EventBus::ClearAll();
+            m_Registry->Reset();
+        }
+
+        void ResetRegistry()
+        {
             m_Registry->Reset();
         }
 

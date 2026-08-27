@@ -20,7 +20,7 @@ namespace Frost
         int         width = 1280;
         int         height = 720;
         bool        vsync = true;
-        std::string assetsRoot = "Assets/";
+        //std::string assetsRoot = "Assets/";
     };
 
     class Application
