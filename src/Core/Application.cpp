@@ -1,6 +1,7 @@
 #include "Application.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Audio/AudioSystem.h"
 
 namespace Frost
 {
@@ -39,6 +40,7 @@ namespace Frost
 
         // input must be after window so EventBus callbacks work
         Input::Init();
+        Frost::AudioSystem::Init();
 
         // renderer
         m_Renderer = std::make_unique<BatchRenderer>();
@@ -109,6 +111,7 @@ namespace Frost
     void Application::Shutdown()
     {
         FROST_LOG("FrostEngine shutting down");
+        Frost::AudioSystem::ShutDown();
         EventBus::ClearAll();
     }
 }

@@ -10,8 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # ======================================================
 if(NOT TARGET glad)
     add_library(glad STATIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/src/glad.c
-     "src/Core/ThreadPool.h")
+        ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/src/glad.c)
     target_include_directories(glad PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/include>
     )
@@ -48,7 +47,7 @@ file(GLOB_RECURSE FROST_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
 )
 
-add_library(Frost STATIC ${FROST_SOURCES} "src/Core/ThreadPool.h")
+add_library(Frost STATIC ${FROST_SOURCES})
 
 # ======================================================
 # Include paths — PUBLIC so consumers inherit them
@@ -60,6 +59,7 @@ target_include_directories(Frost
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw/include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/freetype/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vendor/miniaudio>
 )
 
 # ======================================================

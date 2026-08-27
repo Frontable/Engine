@@ -30,6 +30,9 @@
 #include "Rendering/DebugRenderer.h"
 #include "Rendering/TextRenderer.h"
 
+//Audio
+#include "Audio/AudioSystem.h"
+
 // Assets
 #include "Assets/AssetLoader.h"
 
