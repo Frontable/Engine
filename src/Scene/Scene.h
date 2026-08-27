@@ -27,7 +27,7 @@ namespace Frost
         
         void Init()
         {
-            Frost::Input::Update();//clear input from old scene
+            //Frost::Input::Update();//clear input from old scene
             m_Registry = std::make_unique<Registry>();
             m_ScriptSystem = std::make_unique<ScriptSystem>(*m_Registry);
 
@@ -126,7 +126,7 @@ namespace Frost
                 m_Registry->Add<ScriptComponent>(e, std::move(sc));
             }
 
-            return rawPtr; // ← lets you keep a reference for later use
+            return rawPtr;
         }
 
         std::unique_ptr<Registry>     m_Registry;

@@ -50,7 +50,7 @@ namespace Frost
     {
         if (m_Circles.empty() || !m_Initialized) return;
 
-        // Save state
+        
         GLboolean depthTestWasEnabled;
         glGetBooleanv(GL_DEPTH_TEST, &depthTestWasEnabled);
 
@@ -83,7 +83,7 @@ namespace Frost
             glDrawArrays(GL_LINE_LOOP, 0, SEGMENTS);
         }
 
-        // Restore state exactly as we found it
+        
         if (depthTestWasEnabled) glEnable(GL_DEPTH_TEST);
         else                     glDisable(GL_DEPTH_TEST);
 
