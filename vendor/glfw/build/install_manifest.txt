@@ -1,0 +1,8 @@
+C:/libraries/glfw/lib/glfw3.lib
+C:/libraries/glfw/include/GLFW/glfw3.h
+C:/libraries/glfw/include/GLFW/glfw3native.h
+C:/libraries/glfw/lib/cmake/glfw3/glfw3Config.cmake
+C:/libraries/glfw/lib/cmake/glfw3/glfw3ConfigVersion.cmake
+C:/libraries/glfw/lib/cmake/glfw3/glfw3Targets.cmake
+C:/libraries/glfw/lib/cmake/glfw3/glfw3Targets-release.cmake
+C:/libraries/glfw/lib/pkgconfig/glfw3.pc
