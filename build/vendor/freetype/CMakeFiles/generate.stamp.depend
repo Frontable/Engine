@@ -1,0 +1,15 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.30/Modules/CPack.cmake
+C:/Program Files/CMake/share/cmake-3.30/Modules/CPackComponent.cmake
+C:/Program Files/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.30/Modules/FindBZip2.cmake
+C:/Program Files/CMake/share/cmake-3.30/Modules/FindPNG.cmake
+C:/Program Files/CMake/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.30/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.30/Modules/FindPkgConfig.cmake
+C:/Program Files/CMake/share/cmake-3.30/Modules/FindZLIB.cmake
+C:/Program Files/CMake/share/cmake-3.30/Modules/GNUInstallDirs.cmake
+C:/Program Files/CMake/share/cmake-3.30/Modules/SelectLibraryConfigurations.cmake
+C:/Program Files/CMake/share/cmake-3.30/Templates/CPackConfig.cmake.in
+D:/Projects/Asteroids/third_party/Frost/vendor/freetype/CMakeLists.txt
+D:/Projects/Asteroids/third_party/Frost/vendor/freetype/builds/cmake/FindHarfBuzz.cmake

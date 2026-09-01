@@ -1,0 +1,10 @@
+^D:\PROJECTS\ASTEROIDS\THIRD_PARTY\FROST\BUILD\CMAKEFILES\B4339F1E41CC7EF5CBF4F0A70C373016\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Projects/Asteroids/third_party/Frost -BD:/Projects/Asteroids/third_party/Frost/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Projects/Asteroids/third_party/Frost/build/Frost.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

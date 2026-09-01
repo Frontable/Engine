@@ -1,0 +1,10 @@
+^D:\PROJECTS\ASTEROIDS\THIRD_PARTY\FROST\DEMOS\PLATFORMER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Projects/Asteroids/third_party/Frost -BD:/Projects/Asteroids/third_party/Frost/build --check-stamp-file D:/Projects/Asteroids/third_party/Frost/build/demos/platformer/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

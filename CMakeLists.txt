@@ -3,6 +3,11 @@ project(Frost LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+#=======================================================
+#Demos for testing systems
+#=======================================================
+option(BUILD_DEMO "Bulding demo" OFF)
+
 # ======================================================
 # Only build vendor if not already defined
 # Prevents duplicate target errors when multiple
@@ -107,4 +112,10 @@ else()
         -Wextra
         -Wno-unused-parameter
     )
+endif()
+
+if(BUILD_DEMO)
+
+    message(STATUS "Building demo")
+    add_subdirectory(demos/platformer)
 endif()

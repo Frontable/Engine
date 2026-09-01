@@ -1,0 +1,9 @@
+D:\Projects\Asteroids\third_party\Frost\src\Audio\AudioSystem.cpp;D:\Projects\Asteroids\third_party\Frost\build\Frost.dir\Debug\AudioSystem.obj
+D:\Projects\Asteroids\third_party\Frost\src\Core\Application.cpp;D:\Projects\Asteroids\third_party\Frost\build\Frost.dir\Debug\Application.obj
+D:\Projects\Asteroids\third_party\Frost\src\Platform\Window\GLFWWindow.cpp;D:\Projects\Asteroids\third_party\Frost\build\Frost.dir\Debug\GLFWWindow.obj
+D:\Projects\Asteroids\third_party\Frost\src\Rendering\BatchRenderer.cpp;D:\Projects\Asteroids\third_party\Frost\build\Frost.dir\Debug\BatchRenderer.obj
+D:\Projects\Asteroids\third_party\Frost\src\Rendering\Camera2D.cpp;D:\Projects\Asteroids\third_party\Frost\build\Frost.dir\Debug\Camera2D.obj
+D:\Projects\Asteroids\third_party\Frost\src\Rendering\DebugRenderer.cpp;D:\Projects\Asteroids\third_party\Frost\build\Frost.dir\Debug\DebugRenderer.obj
+D:\Projects\Asteroids\third_party\Frost\src\Rendering\ShaderLoader.cpp;D:\Projects\Asteroids\third_party\Frost\build\Frost.dir\Debug\ShaderLoader.obj
+D:\Projects\Asteroids\third_party\Frost\src\Rendering\TextRenderer.cpp;D:\Projects\Asteroids\third_party\Frost\build\Frost.dir\Debug\TextRenderer.obj
+D:\Projects\Asteroids\third_party\Frost\src\Rendering\TextureLoader.cpp;D:\Projects\Asteroids\third_party\Frost\build\Frost.dir\Debug\TextureLoader.obj

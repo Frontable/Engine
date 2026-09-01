@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Projects\Asteroids\third_party\Frost\build\CMakeFiles\c7cae7017a88c36a2fd9be93ec867a79\PACKAGE_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{3BE4488A-7CF8-3912-8EA5-D9095506FCBB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
